@@ -36,10 +36,4 @@ CREATE TABLE final(
 
 
 INSERT INTO students(studentName)
-VALUES
-('Doe John'),
-('Smith Jane'),
-('Max Koo');
-('Alice Johnson'),
-('Bob Williams'),
-('Michael Brown');
+VALUES VALUES ('Doe John'), ('Smith Jane'), ('Max Koo'), ('Alice Johnson'), ('Bob Williams'), ('Michael Brown');
