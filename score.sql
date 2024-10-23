@@ -7,8 +7,7 @@ DROP TABLE IF EXISTS scores;
 
 CREATE TABLE students(
     student_id int AUTO_INCREMENT PRIMARY KEY,
-    studentName varchar(100) NOT NULL,
-
+    studentName varchar(100) NOT NULL
 );
 
 CREATE TABLE scores(
