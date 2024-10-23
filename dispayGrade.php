@@ -41,6 +41,7 @@ if (!$result) {
 <head>
     <meta charset="utf8">
     <title>Grading System</title>
+    <link rel="stylesheet" type="text/css" href="style.css">
 </head>
 <body>
     <h1>Student Grades</h1>

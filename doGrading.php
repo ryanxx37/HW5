@@ -3,9 +3,10 @@
 <head>
     <meta charset="utf8">
     <title>Grading System</title>
+    <link rel="stylesheet" type="text/css" href="style.css">
 </head>
 <body>
-
+<div class="shadow">
 <?php
 
 $student_id = $_POST['student_id'];
@@ -76,14 +77,15 @@ $stmt_final = mysqli_prepare($dbc, 'INSERT INTO final (student_id, Final_Grade) 
 mysqli_stmt_bind_param($stmt_final, 'ii', $student_id, $final_grade);
 mysqli_stmt_execute($stmt_final);
 
-echo "Grads submitted successfully!";
+echo "<h1>Grads submitted successfully!</h1>";
 
 mysqli_close($dbc);
 ?>
-
+<div class="submitb">
 <form action="dispayGrade.php" method="post">
     <input type="submit" name="submit" value="Display Student Scores">
 </form>
-
+</div>
+</div>
 </body>
 </html>

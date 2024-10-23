@@ -1,0 +1,95 @@
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f7f7f7;
+    margin: 0;
+    padding: 20px;
+}
+h1 {
+    background-color: #008CBA;
+    color: white;
+    text-align: center;
+    font: arial, sans-serif;
+}
+
+table {
+    border-collapse: collapse;
+    width: 100%;
+    margin: 20px 0;
+    background-color: #fff;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+th, td {
+    border: 1px solid #dddddd;
+    text-align: left;
+    padding: 12px;
+}
+
+th {
+    background-color: #1c80dd;
+    color: white;
+}
+
+tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+
+tr:hover {
+    background-color: #e0e0e0;
+}
+
+button {
+    border-radius: 8px;
+    padding: 15px 32px;
+    text-align: center;
+}
+
+.button:hover {
+    background-color: #008CBA; 
+    color: white;
+}
+
+input[type=number] {
+    border: none;
+    border-bottom: 2px solid #008CBA;
+    padding: 8px 20px;
+    width: 80%;
+    margin-left: 5%;
+    font: bold 15px arial,sans-serif;
+}
+
+.submitb {
+    padding: 10px;
+    text-align: center; 
+    background-color: #008CBA;
+    margin: 0 auto; 
+}
+
+input[type=submit] {
+    background-color: #008CBA;
+    border: none;
+    color: white;
+    font: bold 15px arial,sans-serif;
+    transition-duration: 0.8s;
+}
+
+input[type=submit]:hover {
+    background-color: white;
+    color: #008CBA;
+}
+
+label {
+    display: inline-block;
+    width: 100px;
+    margin-left: 5%;
+    text-align: left;
+    font: bold 15px arial,sans-serif;
+}
+
+.shadow {
+    width: 450px;
+    height: 1500;
+    background: #fff;
+    box-shadow: 2px 2px 10px #838181;
+}
