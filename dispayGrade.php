@@ -1,6 +1,6 @@
 <?php
 
-$dbc = mysqli_connect('localhost','csc350','xampp','gradingSystem')
+$dbc = mysqli_connect('localhost','csc350','xampp','gradingSystem');
 
 if (!$dbc) {
     die('Database connection error: ' . mysqli_connect_error());
@@ -8,24 +8,24 @@ if (!$dbc) {
 
 $query = "
         SELECT 
-            s.student_id, 
-            s.studentName, 
-            g.Homework1, 
-            g.Homework2,
-            g.Homework3,
-            g.Homework4, 
-            g.Homework5, 
-            g.Quiz1, 
-            g.Quiz2, 
-            g.Quiz3, 
-            g.Quiz, 
-            g.Quiz5,
-            g.Midterm,
-            g.Final_Project,
-            f.Final_Grade
-        FROM students s
-        JOIN grades g ON s.student_id = g.students_id
-        JOIN final f ON s.student_id = f.student_id
+            students.student_id, 
+            students.studentName, 
+            scores.Homework1, 
+            scores.Homework2,
+            scores.Homework3,
+            scores.Homework4, 
+            scores.Homework5, 
+            scores.Quiz1, 
+            scores.Quiz2, 
+            scores.Quiz3, 
+            scores.Quiz4, 
+            scores.Quiz5,
+            scores.Midterm,
+            scores.Final_Project,
+            final.Final_Grade
+        FROM students
+        LEFT JOIN scores ON students.student_id = scores.student_id
+        LEFT JOIN final ON students.student_id = final.student_id
         ";
 
 $result = mysqli_query($dbc, $query);
@@ -70,20 +70,20 @@ if (!$result) {
                 while ($row = mysqli_fetch_assoc($result)) {
                     echo "<tr>";
                     echo "<td>" . $row['student_id'] . "</td>";
-                    echo "<td>" . $row['student_name'] . "</td>";
-                    echo "<td>" . $row['homework1'] . "</td>";
-                    echo "<td>" . $row['homework2'] . "</td>";
-                    echo "<td>" . $row['homework3'] . "</td>";
-                    echo "<td>" . $row['homework4'] . "</td>";
-                    echo "<td>" . $row['homework5'] . "</td>";
-                    echo "<td>" . $row['quiz1'] . "</td>";
-                    echo "<td>" . $row['quiz2'] . "</td>";
-                    echo "<td>" . $row['quiz3'] . "</td>";
-                    echo "<td>" . $row['quiz4'] . "</td>";
-                    echo "<td>" . $row['quiz5'] . "</td>";
-                    echo "<td>" . $row['midterm'] . "</td>";
-                    echo "<td>" . $row['final_project'] . "</td>";
-                    echo "<td>" . $row['final_grade'] . "</td>";
+                    echo "<td>" . $row['studentName'] . "</td>";
+                    echo "<td>" . $row['Homework1'] . "</td>";
+                    echo "<td>" . $row['Homework2'] . "</td>";
+                    echo "<td>" . $row['Homework3'] . "</td>";
+                    echo "<td>" . $row['Homework4'] . "</td>";
+                    echo "<td>" . $row['Homework5'] . "</td>";
+                    echo "<td>" . $row['Quiz1'] . "</td>";
+                    echo "<td>" . $row['Quiz2'] . "</td>";
+                    echo "<td>" . $row['Quiz3'] . "</td>";
+                    echo "<td>" . $row['Quiz4'] . "</td>";
+                    echo "<td>" . $row['Quiz5'] . "</td>";
+                    echo "<td>" . $row['Midterm'] . "</td>";
+                    echo "<td>" . $row['Final_Project'] . "</td>";
+                    echo "<td>" . $row['Final_Grade'] . "</td>";
                     echo "</tr>";  
                 }
             } else {
