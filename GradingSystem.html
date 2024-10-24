@@ -12,7 +12,17 @@
         </div>
             <form action="doGrading.php" method="post">
                 <label for="student_id">Student ID: </label>
-                <input type="number" id="student_id" name="student_id" required><br><br>
+                <!-- <input type="number" id="student_id" name="student_id" required><br><br> -->
+                <div class="option">
+                <select name="student_id" id="student_id">
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                    <option value="6">6</option>
+                </select><br><br>
+                </div>
 
                 <label for="homework1">Homework 1: </label>
                 <input type="number" id="homework1" name="homework1" required><br><br>
@@ -53,7 +63,13 @@
             <div class="submitb">
                 <input type="submit" value="Submit Grades">
             </div>
+        
             </form>
+            <div class="submitb">
+                <form action="dispayGrade.php" method="post">
+                    <input type="submit" name="submit" value="Display Student Scores">
+                </form>
+            </div>
     </div>
 </body>
 </html>
