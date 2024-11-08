@@ -1,37 +1,16 @@
 <?php
 
-$dbc = mysqli_connect('localhost','csc350','xampp','gradingSystem');
+require 'db.php';  // Reusable database connection logic
+require 'gradingFunctions.php';  // Query and display logic
 
-if (!$dbc) {
-    die('Database connection error: ' . mysqli_connect_error());
-}
+try {
+    $dbc = getDbConnection();  // Fetch database connection
 
-$query = "
-        SELECT 
-            students.student_id, 
-            students.studentName, 
-            scores.Homework1, 
-            scores.Homework2,
-            scores.Homework3,
-            scores.Homework4, 
-            scores.Homework5, 
-            scores.Quiz1, 
-            scores.Quiz2, 
-            scores.Quiz3, 
-            scores.Quiz4, 
-            scores.Quiz5,
-            scores.Midterm,
-            scores.Final_Project,
-            final.Final_Grade
-        FROM students
-        LEFT JOIN scores ON students.student_id = scores.student_id
-        LEFT JOIN final ON students.student_id = final.student_id
-        ";
+    $studentsData = getStudentGrades($dbc);  // Fetch grades data
 
-$result = mysqli_query($dbc, $query);
-
-if (!$result) {
-    die('Query error: ' . mysqli_error($conn));
+} catch (Exception $e) {
+    error_log($e->getMessage());
+    die("Error retrieving data: " . $e->getMessage());
 }
 
 ?>
@@ -66,37 +45,34 @@ if (!$result) {
             </tr>
         </thead>
         <tbody>
-            <?php
-            if (mysqli_num_rows($result) > 0) {
-                while ($row = mysqli_fetch_assoc($result)) {
-                    echo "<tr>";
-                    echo "<td>" . $row['student_id'] . "</td>";
-                    echo "<td>" . $row['studentName'] . "</td>";
-                    echo "<td>" . $row['Homework1'] . "</td>";
-                    echo "<td>" . $row['Homework2'] . "</td>";
-                    echo "<td>" . $row['Homework3'] . "</td>";
-                    echo "<td>" . $row['Homework4'] . "</td>";
-                    echo "<td>" . $row['Homework5'] . "</td>";
-                    echo "<td>" . $row['Quiz1'] . "</td>";
-                    echo "<td>" . $row['Quiz2'] . "</td>";
-                    echo "<td>" . $row['Quiz3'] . "</td>";
-                    echo "<td>" . $row['Quiz4'] . "</td>";
-                    echo "<td>" . $row['Quiz5'] . "</td>";
-                    echo "<td>" . $row['Midterm'] . "</td>";
-                    echo "<td>" . $row['Final_Project'] . "</td>";
-                    echo "<td>" . $row['Final_Grade'] . "</td>";
-                    echo "</tr>";  
-                }
-            } else {
-                echo "<tr><td>No students found!</td></tr>";
-            }
-            ?>
+            <?php if (!empty($studentsData)): ?>
+                <?php foreach ($studentsData as $row): ?>
+                    <tr>
+                        <td><?= htmlspecialchars($row['student_id']) ?></td>
+                        <td><?= htmlspecialchars($row['studentName']) ?></td>
+                        <td><?= htmlspecialchars($row['Homework1']) ?></td>
+                        <td><?= htmlspecialchars($row['Homework2']) ?></td>
+                        <td><?= htmlspecialchars($row['Homework3']) ?></td>
+                        <td><?= htmlspecialchars($row['Homework4']) ?></td>
+                        <td><?= htmlspecialchars($row['Homework5']) ?></td>
+                        <td><?= htmlspecialchars($row['Quiz1']) ?></td>
+                        <td><?= htmlspecialchars($row['Quiz2']) ?></td>
+                        <td><?= htmlspecialchars($row['Quiz3']) ?></td>
+                        <td><?= htmlspecialchars($row['Quiz4']) ?></td>
+                        <td><?= htmlspecialchars($row['Quiz5']) ?></td>
+                        <td><?= htmlspecialchars($row['Midterm']) ?></td>
+                        <td><?= htmlspecialchars($row['Final_Project']) ?></td>
+                        <td><?= htmlspecialchars($row['Final_Grade']) ?></td>
+                    </tr>
+                <?php endforeach; ?>
+            <?php else: ?>
+                <tr><td colspan="15">No students found!</td></tr>
+            <?php endif; ?>
         </tbody>
     </table>
 </body>
 </html>
 
 <?php
-mysqli_close($dbc);
-
+$dbc->close();
 ?>
