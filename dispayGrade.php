@@ -1,7 +1,7 @@
 <?php
 
 require 'db.php';  // Reusable database connection logic
-require 'gradingFunctions.php';  // Query and display logic
+require 'gradingFuns.php';  // Query and display logic
 
 try {
     $dbc = getDbConnection();  // Fetch database connection
