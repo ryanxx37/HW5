@@ -1,3 +1,13 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf8">
+    <title>Grading System</title>
+    <link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body>
+<div class="shadow">
+
 <?php
 
 require 'db.php';
@@ -23,12 +33,23 @@ try {
     $dbc = getDbConnection(); // From `db.php`
     $dbc->begin_transaction();
 
-    // Insert scores
-    insertScores($dbc, $grades);
+    if (studentExists($dbc, $grades['student_id'])) {
+        // Update scores if student exists
+        updateScores($dbc, $grades);
+    } else {
+        // Insert new scores if student does not exist
+        insertScores($dbc, $grades);
+    }
 
     // Calculate and insert final grade
     $finalGrade = calcFinalGrade($grades);
-    insertFinalGrade($dbc, $grades['student_id'], $finalGrade);
+    
+    if (finalGradeExists($dbc, $grades['student_id'])) {
+        updateFinalGrade($dbc, $grades['student_id'], $finalGrade);
+    } else {
+        insertFinalGrade($dbc, $grades['student_id'], $finalGrade);
+    }
+    
 
     $dbc->commit();
 
@@ -43,3 +64,11 @@ try {
 }
 
 ?>
+<div class="submitb">
+<form action="dispayGrade.php" method="post">
+    <input type="submit" name="submit" value="Display Student Scores">
+</form>
+</div>
+</div>
+</body>
+</html>
